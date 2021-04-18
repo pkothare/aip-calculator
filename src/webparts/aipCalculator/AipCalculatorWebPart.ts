@@ -10,7 +10,10 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'AipCalculatorWebPartStrings';
 import AipCalculator from './components/AipCalculator';
 import { IAipCalculatorProps } from './components/IAipCalculatorProps';
+import RoleDropdownOption from './RoleDropdownOption';
 import AipDropdownOption from './AipDropdownOption';
+import IndividualPerformanceBandDropdownOption from './IndividualPerformanceBandDropdownOption';
+import CompanyPerformanceBandDropdownOption from './CompanyPerformanceBandDropdownOption';
 
 export interface IAipCalculatorWebPartProps {
   description: string;
@@ -38,10 +41,13 @@ export default class AipCalculatorWebPart extends BaseClientSideWebPart<IAipCalc
     const element: React.ReactElement<IAipCalculatorProps> = React.createElement(
       AipCalculator,
       {
-        description: this.properties.description
+        description: this.properties.description,
+        roles: this.createDropDownOptions(RoleDropdownOption, this.properties.roles),
+        individualPerformanceBands: this.createDropDownOptions(IndividualPerformanceBandDropdownOption, this.properties.individualPerformanceBands),
+        companyPerformanceBands: this.createDropDownOptions(CompanyPerformanceBandDropdownOption, this.properties.companyPerformanceBands),
       }
     );
-
+    
     ReactDom.render(element, this.domElement);
   }
 
