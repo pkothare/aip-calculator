@@ -10,6 +10,7 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'AipCalculatorWebPartStrings';
 import AipCalculator from './components/AipCalculator';
 import { IAipCalculatorProps } from './components/IAipCalculatorProps';
+import AipDropdownOption from './AipDropdownOption';
 
 export interface IAipCalculatorWebPartProps {
   description: string;
@@ -19,6 +20,19 @@ export interface IAipCalculatorWebPartProps {
 }
 
 export default class AipCalculatorWebPart extends BaseClientSideWebPart<IAipCalculatorWebPartProps> {
+
+  private createDropDownOptions<T extends AipDropdownOption>(
+    ctor: new (datatText: string) => T,
+    propertyValue: string): T[] {
+
+      if(!propertyValue) return null;
+      const dataTextCollection = propertyValue.split('\n');
+      let dropDownOptions = [];
+      for (var i = 0; i < dataTextCollection.length; i++) {
+        dropDownOptions.push(new ctor(dataTextCollection[i]));
+      }
+      return dropDownOptions;
+  }
 
   public render(): void {
     const element: React.ReactElement<IAipCalculatorProps> = React.createElement(
