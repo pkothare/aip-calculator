@@ -13,6 +13,9 @@ import { IAipCalculatorProps } from './components/IAipCalculatorProps';
 
 export interface IAipCalculatorWebPartProps {
   description: string;
+  roles: string;
+  individualPerformanceBands: string;
+  companyPerformanceBands: string;
 }
 
 export default class AipCalculatorWebPart extends BaseClientSideWebPart<IAipCalculatorWebPartProps> {
@@ -49,7 +52,28 @@ export default class AipCalculatorWebPart extends BaseClientSideWebPart<IAipCalc
               groupFields: [
                 PropertyPaneTextField('description', {
                   label: strings.DescriptionFieldLabel
-                })
+                }),
+                PropertyPaneTextField('roles', {
+                  label: strings.RolesFieldLabel,
+                  description: strings.RolesFieldDescription,
+                  multiline: true,
+                  resizable: false,
+                  rows: 10
+                }),
+                PropertyPaneTextField('individualPerformanceBands', {
+                  label: strings.IndividualPerformanceBandsFieldLabel,
+                  description: strings.IndividualPerformanceBandsFieldDescription,
+                  multiline: true,
+                  resizable: false,
+                  rows: 10
+                }),
+                PropertyPaneTextField('companyPerformanceBands', {
+                  label: strings.CompanyPerformanceBandsFieldLabel,
+                  description: strings.CompanyPerformanceBandsFieldDescription,
+                  multiline: true,
+                  resizable: false,
+                  rows: 10
+                }),
               ]
             }
           ]
