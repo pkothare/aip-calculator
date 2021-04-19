@@ -3,7 +3,25 @@ import styles from './AipCalculator.module.scss';
 import { IAipCalculatorProps } from './IAipCalculatorProps';
 import { escape } from '@microsoft/sp-lodash-subset';
 
-export default class AipCalculator extends React.Component<IAipCalculatorProps, {}> {
+interface IAipCalculatorState {
+  annualSalary: number;
+  selectedRolePercentage: number;
+  selectedIndividualPerformanceBandPercentage: number;
+  selectedCompanyPerformanceBandPercentage: number;
+}
+
+export default class AipCalculator extends React.Component<IAipCalculatorProps, IAipCalculatorState> {
+
+  constructor(props: Readonly<IAipCalculatorProps>) {
+    super(props);
+    this.state = {
+      annualSalary: NaN,
+      selectedRolePercentage: NaN,
+      selectedIndividualPerformanceBandPercentage: NaN,
+      selectedCompanyPerformanceBandPercentage: NaN
+    };
+  }
+
   public render(): React.ReactElement<IAipCalculatorProps> {
     return (
       <div className={ styles.aipCalculator }>
