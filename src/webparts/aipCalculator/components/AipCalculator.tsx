@@ -91,7 +91,27 @@ export default class AipCalculator extends React.Component<IAipCalculatorProps, 
       this.setState({ selectedCompanyPerformanceBandPercentage: NaN });
     }
   }
+
   public render(): React.ReactElement<IAipCalculatorProps> {
+
+    const stackStyles: IStackStyles = {
+      root: {
+        background: DefaultPalette.white,
+      }
+    };
+
+    const stackItemStyles: IStackItemStyles = {
+      root: {
+        padding: 5
+      }
+    };
+
+    const itemAlignmentsStackTokens: IStackTokens = {
+      childrenGap: 5,
+      padding: 10
+    };
+
+    const finalMessage = this.getFinalMessage(this.state);
     return (
       <div className={ styles.aipCalculator }>
         <div className={ styles.container }>
