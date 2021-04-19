@@ -1,4 +1,4 @@
-# hr-aip-calculator
+# aip-calculator
 
 ## Summary
 
