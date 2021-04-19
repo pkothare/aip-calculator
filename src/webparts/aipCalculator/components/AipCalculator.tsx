@@ -22,6 +22,27 @@ export default class AipCalculator extends React.Component<IAipCalculatorProps, 
     };
   }
 
+  private getFinalMessage(state: Readonly<IAipCalculatorState>): string {
+    if(isNaN(state.annualSalary)) {
+      return "Enter a valid annual salary.";
+    }
+    else if(isNaN(state.selectedRolePercentage)) {
+      return "Pick a valid role.";
+    }
+    else if(isNaN(state.selectedIndividualPerformanceBandPercentage)) {
+      return "Pick a valid individual performance band.";
+    }
+    else if(isNaN(state.selectedCompanyPerformanceBandPercentage)) {
+      return "Pick a valid company performance band.";
+    }
+    else  {
+      let individualComponent = (state.selectedRolePercentage / 2) * state.selectedIndividualPerformanceBandPercentage;
+      let corporateComponent = (state.selectedRolePercentage /2) * state.selectedCompanyPerformanceBandPercentage;
+      let payout = state.annualSalary * (individualComponent + corporateComponent);
+      return `Total payout is ${payout}`;
+    }
+  }
+
   public render(): React.ReactElement<IAipCalculatorProps> {
     return (
       <div className={ styles.aipCalculator }>
