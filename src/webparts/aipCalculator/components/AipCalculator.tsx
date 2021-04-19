@@ -2,6 +2,7 @@ import * as React from 'react';
 import styles from './AipCalculator.module.scss';
 import { IAipCalculatorProps } from './IAipCalculatorProps';
 import { escape } from '@microsoft/sp-lodash-subset';
+import { Dropdown, Stack, IStackTokens, IStackStyles, IStackItemStyles, DefaultPalette, TextField, ITextFieldStyleProps, ITextFieldStyles, ILabelStyleProps, ILabelStyles, IDropdownOption } from '@fluentui/react';
 
 interface IAipCalculatorState {
   annualSalary: number;
@@ -112,20 +113,57 @@ export default class AipCalculator extends React.Component<IAipCalculatorProps, 
     };
 
     const finalMessage = this.getFinalMessage(this.state);
+
     return (
-      <div className={ styles.aipCalculator }>
-        <div className={ styles.container }>
-          <div className={ styles.row }>
-            <div className={ styles.column }>
-              <span className={ styles.title }>Welcome to SharePoint!</span>
-              <p className={ styles.subTitle }>Customize SharePoint experiences using Web Parts.</p>
-              <p className={ styles.description }>{escape(this.props.description)}</p>
-              <a href="https://aka.ms/spfx" className={ styles.button }>
-                <span className={ styles.label }>Learn more</span>
-              </a>
-            </div>
-          </div>
-        </div>
+      <div className={styles.aipCalculator}>
+        <Stack styles={stackStyles} tokens={itemAlignmentsStackTokens}>
+          <Stack.Item styles={stackItemStyles}>
+            <span className={styles.title}>Annual Incentive Plan Calculator</span>
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            {escape(this.props.description)}
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            <TextField
+              label='Annual Salary'
+              placeholder='Enter a dollar amount'
+              onGetErrorMessage={this.getErrorMessage}
+              onNotifyValidationResult={this.handleAnnualSalaryChange}
+              prefix='$'
+              type='number'
+              min='0'
+              max='300000'
+              step='0.01'
+            />
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            <Dropdown
+              placeholder="Select a role"
+              label="Roles"
+              onChange={this.handleRoleChange}
+              options={this.props.roles}
+            />
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            <Dropdown
+              placeholder="Select an individual performance band"
+              label="Individual Performance Bands"
+              onChange={this.handleIndividualPerformanceBandChange}
+              options={this.props.individualPerformanceBands}
+            />
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            <Dropdown
+              placeholder="Select a company performance band"
+              label="Company Performance Bands"
+              onChange={this.handleCompanyPerformanceBandChange}
+              options={this.props.companyPerformanceBands}
+            />
+          </Stack.Item>
+          <Stack.Item styles={stackItemStyles}>
+            {finalMessage}
+          </Stack.Item>
+        </Stack>
       </div>
     );
   }
