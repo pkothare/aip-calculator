@@ -65,6 +65,32 @@ export default class AipCalculator extends React.Component<IAipCalculatorProps, 
     }
   }
 
+  private handleRoleChange = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => {
+    if (option && !isNaN(option.data)) {
+      this.setState({ selectedRolePercentage: (option.data / 100) });
+    }
+    else {
+      this.setState({ selectedRolePercentage: NaN });
+    }
+  }
+
+  private handleIndividualPerformanceBandChange = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => {
+    if (option && !isNaN(option.data)) {
+      this.setState({ selectedIndividualPerformanceBandPercentage: (option.data / 100) });
+    }
+    else {
+      this.setState({ selectedIndividualPerformanceBandPercentage: NaN });
+    }
+  }
+
+  private handleCompanyPerformanceBandChange = (event: React.FormEvent<HTMLDivElement>, option?: IDropdownOption, index?: number) => {
+    if (option && !isNaN(option.data)) {
+      this.setState({ selectedCompanyPerformanceBandPercentage: (option.data / 100) });
+    }
+    else {
+      this.setState({ selectedCompanyPerformanceBandPercentage: NaN });
+    }
+  }
   public render(): React.ReactElement<IAipCalculatorProps> {
     return (
       <div className={ styles.aipCalculator }>
