@@ -27,10 +27,9 @@ export default class AipCalculatorWebPart extends BaseClientSideWebPart<IAipCalc
   private createDropDownOptions<T extends AipDropdownOption>(
     ctor: new (datatText: string) => T,
     propertyValue: string): T[] {
-
-      if(!propertyValue) return null;
+      let dropDownOptions = new Array<T>();
+      if(!propertyValue) return dropDownOptions;
       const dataTextCollection = propertyValue.split('\n');
-      let dropDownOptions = [];
       for (var i = 0; i < dataTextCollection.length; i++) {
         dropDownOptions.push(new ctor(dataTextCollection[i]));
       }
