@@ -43,6 +43,28 @@ export default class AipCalculator extends React.Component<IAipCalculatorProps, 
     }
   }
 
+  private getErrorMessage = (value: string): string => {
+    var numericValue = +value;
+    if (isNaN(numericValue)) {
+      return 'Enter a valid number.';
+    }
+    else if (numericValue < 0 || numericValue > 3000000) {
+      return 'Enter a valid number beteween 0 and 300000.';
+    }
+    else {
+      return '';
+    }
+  }
+
+  private handleAnnualSalaryChange = (errorMessage: string, value: string) => {
+    if (!errorMessage) {
+      this.setState({ annualSalary: +value });
+    }
+    else {
+      this.setState({ annualSalary: NaN });
+    }
+  }
+
   public render(): React.ReactElement<IAipCalculatorProps> {
     return (
       <div className={ styles.aipCalculator }>
