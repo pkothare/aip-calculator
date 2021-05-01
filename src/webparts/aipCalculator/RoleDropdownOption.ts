@@ -9,6 +9,6 @@ export default class RoleDropdownOption extends AipDropdownOption {
         }
         this.key = values[0];
         this.text = this.text = `${values[0]} (${values[1]}%)`;
-        this.data = parseFloat(values[1]);
+        this.data = +values[1];
     }
 }

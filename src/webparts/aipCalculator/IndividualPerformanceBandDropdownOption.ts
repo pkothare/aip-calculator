@@ -9,6 +9,6 @@ export default class IndividualPerformanceBandDropdownOption extends AipDropdown
         }
         this.key = values[0];
         this.text = `${values[0]}: ${values[1]} - ${values[2]} (${values[3]}%)`;
-        this.data = parseFloat(values[3]);
+        this.data = +values[3];
     }
 }
